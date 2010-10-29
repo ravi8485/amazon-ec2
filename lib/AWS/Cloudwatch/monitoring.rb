@@ -68,6 +68,13 @@ module AWS
                     "Unit" => options[:unit]
         }
 
+
+        options[:dimensions].each_with_index do |dim, i|
+                       params["Dimensions.member.#{i + 1}.Name"] = dim[0]
+                       params["Dimensions.member.#{i + 1}.Value"] = dim[1]
+                    end
+
+
         return response_generator(:action => 'GetMetricStatistics', :params => params)
 
       end
